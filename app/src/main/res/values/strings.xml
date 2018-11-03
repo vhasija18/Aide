@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Aide</string>
+    <string name="title_activity_login">login</string>
+    <string name="title_activity_signup">Signup</string>
+    <string name="title_activity_maps">Aide</string>
+    <string name="title_activity_maps__login">Map</string>
+</resources>
