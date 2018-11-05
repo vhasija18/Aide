@@ -8,49 +8,56 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 public class Signup extends AppCompatActivity {
 
 
     double longitude =00.00;
     double latitude  =00.00;
-    CheckBox firefigther,doctor,mechanic,ambulance;
-    AutoCompleteTextView gender,occupation;
     RadioButton  user,aide;
-    EditText  name,email,dob,phone,username,password,confirmpassword;
-    String Occupation[] = {"Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
-    String Gender[]= {"Male","Female"};
-    String name_value,email_value,dob_value,phone_value,username_value,password_value,confirmpassword_value,
+    EditText  name,email,dob,phone,pin,confirmpin;
+    String Occupation[] = {"How can you Help","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
+    String Gender[]= {"Gender","Male","Female"};
+    String name_value,email_value,dob_value,phone_value,pin_value,confirmpin_value,
             gender_value,occupation_value;
-    String occupation1,occupation2,occupation3,occupation4;
     int flag =1;
+    Spinner occupation,gender;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        firefigther = (CheckBox) findViewById(R.id.signup_Fire_Fighter);
-        doctor      = (CheckBox) findViewById(R.id.signup_Doctor);
-        mechanic    = (CheckBox) findViewById(R.id.signup_Mechanic);
-        ambulance   = (CheckBox) findViewById(R.id.signup_Ambulance);
-        gender      = (AutoCompleteTextView) findViewById(R.id.signup_Gender);
-        occupation  = (AutoCompleteTextView) findViewById(R.id.signup_Occupation);
+        setContentView(R.layout.activity_signup);;
+        occupation  = (Spinner) findViewById(R.id.signup_help);
+        gender      = (Spinner) findViewById(R.id.signup_gender);
         name        = (EditText) findViewById(R.id.signup_Name);
         email       = (EditText) findViewById(R.id.signup_email);
         phone       = (EditText) findViewById(R.id.signup_phone);
         dob         = (EditText) findViewById(R.id.signup_dob);
-        username    = (EditText) findViewById(R.id.signup_userName);
-        password    = (EditText) findViewById(R.id.signup_password);
-        confirmpassword = (EditText) findViewById(R.id.signup_confirmpassword);
+        pin    = (EditText) findViewById(R.id.signup_pin);
+        confirmpin = (EditText) findViewById(R.id.signup_confirmpin);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,Gender);
         ArrayAdapter adapter1 = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,Occupation);
         gender.setAdapter(adapter);
-        gender.setThreshold(1);
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                gender_value= parent.getItemAtPosition(position).toString();
+                System.out.println(gender_value);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         occupation.setAdapter(adapter1);
-        occupation.setThreshold(1);
+        occupation.setEnabled(false);
+
             }
     public void Maps(View view) {
         Intent intent = new Intent(Signup.this,Maps.class);
@@ -64,13 +71,24 @@ public class Signup extends AppCompatActivity {
             switch(view.getId())
             {
                 case R.id.signup_User:
+                    occupation.setEnabled(false);
                     break;
                 case R.id.signup_Aide:
-                    doctor.setEnabled(true);
-                    mechanic.setEnabled(true);
-                    firefigther.setEnabled(true);
-                    ambulance.setEnabled(true);
                     flag =-1;
+                    occupation.setEnabled(true);
+                    occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            occupation_value= parent.getItemAtPosition(position).toString();
+                            System.out.println(occupation_value);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
                     break;
             }
         }
@@ -92,24 +110,6 @@ public class Signup extends AppCompatActivity {
         System.out.println("MIke");
         if(flag== -1)
           {
-              if(doctor.isChecked())
-              {
-                  occupation1 = "doctor";
-              }
-              if(mechanic.isChecked())
-              {
-                  occupation2= "Mechanic";
-              }
-
-              if(firefigther.isChecked())
-              {
-                  occupation3 ="Fire Figther";
-              }
-
-              if(ambulance.isChecked())
-              {
-                  occupation4 = "Ambulance";
-              }
 
           }
 
@@ -117,11 +117,8 @@ public class Signup extends AppCompatActivity {
         email_value = email.getText().toString();
         phone_value = phone.getText().toString();
         dob_value   = dob.getText().toString();
-        username_value = username.getText().toString();
-        password_value = password.getText().toString();
-        confirmpassword_value= confirmpassword.getText().toString();
-        gender_value =gender.getText().toString();
-        occupation_value= occupation.getText().toString();
+        pin_value = pin.getText().toString();
+        confirmpin_value= confirmpin.getText().toString();
 
         System.out.println(name_value);
         System.out.println(email_value);
@@ -129,18 +126,10 @@ public class Signup extends AppCompatActivity {
         System.out.println(phone_value);
         System.out.println(gender_value);
         System.out.println(occupation_value);
-        System.out.println(username_value);
-        System.out.println(password_value);
-        System.out.println(confirmpassword_value);
-        System.out.println(occupation1);
-        System.out.println(occupation2);
-        System.out.println(occupation3);
-        System.out.println(occupation4);
+        System.out.println(pin_value);
+        System.out.println(confirmpin_value);
         System.out.println(latitude);
         System.out.println(longitude);
-        
-
-jhjsdsahjdhsajhdkjashdkjahdkja
 
     }
 

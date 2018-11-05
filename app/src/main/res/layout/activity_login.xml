@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Enter User ID" />
+            android:hint="Enter Your Email Id/Phone" />
 
         <EditText
             android:id="@+id/Password"

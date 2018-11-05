@@ -68,12 +68,14 @@
         android:layout_weight=".60"
         android:hint="Date of Birth : DD/MM/YYYY" />
 
-    <AutoCompleteTextView
-        android:id="@+id/signup_Gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight=".40"
-        android:hint="Gender"/>
+        <Spinner
+            android:id="@+id/signup_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_weight=".4"
+            android:autofillHints="Gender"/>
+
     </LinearLayout>
 
 
@@ -87,97 +89,31 @@
         android:hint="Enter Your Phone number"/>
 
 
-        <AutoCompleteTextView
-            android:id="@+id/signup_Occupation"
+        <Spinner
+            android:id="@+id/signup_help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Occupation" />
+            android:spinnerMode="dropdown"
+            android:autofillHints="How can you Help!" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout3"
-        android:orientation="vertical"
-        android:visibility="visible">
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="How can you help!"
-            android:textSize="25dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout4"
-            android:orientation="horizontal"
-            android:visibility="visible">
-        <CheckBox
-        android:id="@+id/signup_Doctor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Doctor"
-        android:layout_weight=".50"
-        android:enabled="false"    />
-
-    <CheckBox
-        android:id="@+id/signup_Ambulance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ambulance"
-        android:layout_weight=".5"
-        android:enabled="false"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/layout5"
-            android:orientation="horizontal"
-            android:visibility="visible">
-    <CheckBox
-        android:id="@+id/signup_Mechanic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mechanic"
-        android:layout_weight=".5"
-        android:enabled="false"/>
-
-    <CheckBox
-        android:id="@+id/signup_Fire_Fighter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fire Fighter"
-        android:layout_weight=".5"
-        android:enabled="false"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <EditText
-        android:id="@+id/signup_userName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="User Name" />
-
-    <EditText
-        android:id="@+id/signup_password"
+        android:id="@+id/signup_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberPassword"
-        android:hint="Enter Password"/>
+        android:hint="Enter Pin"/>
 
     <EditText
-        android:id="@+id/signup_confirmpassword"
+        android:id="@+id/signup_confirmpin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberPassword"
-        android:hint="Confirm Password"/>
+        android:hint="Confirm Pin"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
