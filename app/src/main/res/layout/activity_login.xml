@@ -4,67 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login">
+    tools:context=".login"
+    android:background="@drawable/gradient">
 
 
     <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout1"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:layout_marginTop="25dp">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login" />
+            android:text="Already a member Login/Signup"
+            android:textAlignment="center"
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Enter Your Email Id/Phone" />
+            android:hint="Enter Your Email Id/Phone"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberPassword"
-            android:hint="Enter Your Pin"/>
+            android:hint="Enter Your Pin"
+            android:inputType="numberPassword" />
 
         <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Maps_login"
+                android:text="Login" />
+
+            <Button
+                android:id="@+id/signUp"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="signupform"
+                android:text="Signup!" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="20dp">
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:onClick="Maps_login"/>
-
-    <Button
-        android:id="@+id/signUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Signup!"
-        android:onClick="signupform"/>
-    </LinearLayout>
+        android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/AboutUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="About Us" />
+            android:text="About Us"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:id="@+id/ContactUs"
@@ -73,9 +93,7 @@
             android:gravity="center"
             android:text="Contact Us" />
 
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

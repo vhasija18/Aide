@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="335dp"
-        android:src="@drawable/front_page"
+        android:src="@drawable/background"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="109dp" />
 
