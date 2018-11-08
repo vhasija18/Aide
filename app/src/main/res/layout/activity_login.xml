@@ -29,9 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:ems="10"
+            android:ems="20"
             android:hint="Enter Your Email Id/Phone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:background="@drawable/textview"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="25dp"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/Password"
@@ -75,7 +80,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_alignParentBottom="true">
+        android:layout_marginBottom="70dp">
 
         <TextView
             android:id="@+id/AboutUs"
@@ -83,15 +88,16 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="About Us"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/ContactUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Contact Us" />
+            android:text="Contact Us"
+            android:layout_alignBottom="@+id/AboutUs"/>
 
     </RelativeLayout>
 
