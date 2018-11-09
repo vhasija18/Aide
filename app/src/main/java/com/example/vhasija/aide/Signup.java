@@ -31,7 +31,7 @@ public class Signup extends AppCompatActivity {
     Spinner occupation,gender;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);;
+        setContentView(R.layout.activity_signup);
         occupation  = (Spinner) findViewById(R.id.signup_help);
         gender      = (Spinner) findViewById(R.id.signup_gender);
         name        = (EditText) findViewById(R.id.signup_Name);
@@ -71,11 +71,12 @@ public class Signup extends AppCompatActivity {
             switch(view.getId())
             {
                 case R.id.signup_User:
-                    //edited here
                     //occupation.setEnabled(false);
+                    occupation.setVisibility(View.GONE);
                     break;
                 case R.id.signup_Aide:
                     flag =-1;
+                   occupation.setVisibility(View.VISIBLE);
                     occupation.setEnabled(true);
                     occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
