@@ -71,7 +71,8 @@ public class Signup extends AppCompatActivity {
             switch(view.getId())
             {
                 case R.id.signup_User:
-                    occupation.setEnabled(false);
+                    //edited here
+                    //occupation.setEnabled(false);
                     break;
                 case R.id.signup_Aide:
                     flag =-1;
