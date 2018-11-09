@@ -76,9 +76,8 @@ public class Signup extends AppCompatActivity {
                     break;
                 case R.id.signup_Aide:
                     flag =-1;
-                    occupation.setVisibility(View.VISIBLE);
+                   occupation.setVisibility(View.VISIBLE);
                     occupation.setEnabled(true);
-                    //hello this is dhiraj
                     occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
