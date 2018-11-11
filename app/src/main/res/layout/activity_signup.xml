@@ -9,24 +9,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/layout1"
         android:orientation="vertical"
         android:visibility="visible"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:background="@drawable/gradient">
 
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
         <RadioButton
             android:id="@+id/signup_User"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="User"
             android:layout_weight=".5"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:textSize="20sp"/>
 
         <RadioButton
             android:id="@+id/signup_Aide"
@@ -34,7 +39,8 @@
             android:layout_height="wrap_content"
             android:text="Aide"
             android:layout_weight=".5"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:textSize="20sp"/>
         </RadioGroup>
 
         <EditText
@@ -43,7 +49,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Name:" />
+        android:hint="Name:"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"    />
 
 
     <EditText
@@ -52,7 +64,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint= "Enter Your Email Id"/>
+        android:hint= "Enter Your Email Id"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,15 +84,20 @@
         android:ems="10"
         android:inputType="date"
         android:layout_weight=".60"
-        android:hint="Date of Birth : DD/MM/YYYY" />
+        android:hint="Date of Birth : DD/MM/YYYY"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
 
         <Spinner
             android:id="@+id/signup_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
-            android:layout_weight=".4"
-            android:autofillHints="Gender"/>
+            android:layout_weight=".4" />
 
     </LinearLayout>
 
@@ -86,15 +109,22 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        android:hint="Enter Your Phone number"/>
+        android:hint="Enter Your Phone number"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
 
 
         <Spinner
             android:id="@+id/signup_help"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:spinnerMode="dropdown"
-            android:autofillHints="How can you Help!" />
+            android:autofillHints="How can you Help!"
+            android:visibility="gone"/>
 
 
 
@@ -105,7 +135,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberPassword"
-        android:hint="Enter Pin"/>
+        android:hint="Enter Pin"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"/>
 
     <EditText
         android:id="@+id/signup_confirmpin"
@@ -113,13 +149,21 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberPassword"
-        android:hint="Confirm Pin"/>
+        android:hint="Confirm Pin"
+        android:background="@drawable/textview"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout6"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="visible"
+        >
 
     <Button
             android:id="@+id/button3"
@@ -127,14 +171,19 @@
             android:layout_height="wrap_content"
             android:text="Tag your location"
             android:layout_weight=".5"
-            android:onClick="Maps"        />
+            android:onClick="tagurlocation"
+            android:background="@drawable/button_style"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
         <Button
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:onClick="last"
-            android:layout_weight=".5"/>
+            android:onClick="signup"
+            android:layout_weight=".5"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_style"/>
     </LinearLayout>
     </LinearLayout>
 

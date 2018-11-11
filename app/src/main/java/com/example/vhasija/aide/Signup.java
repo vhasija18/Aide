@@ -59,7 +59,7 @@ public class Signup extends AppCompatActivity {
         occupation.setEnabled(false);
 
             }
-    public void Maps(View view) {
+    public void tagurlocation(View view) {
         Intent intent = new Intent(Signup.this,Maps.class);
         startActivityForResult(intent,10);
     }
@@ -107,8 +107,9 @@ public class Signup extends AppCompatActivity {
             }
         }
 
-    public void last(View View)
+    public void signup(View view)
     {
+
         System.out.println("MIke");
         if(flag== -1)
           {

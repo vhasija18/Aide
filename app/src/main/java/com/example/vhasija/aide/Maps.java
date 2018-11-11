@@ -205,7 +205,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
-    public void signupform1(View View)
+    public void signupform1(View view)
     {
         Intent resultData = new Intent();
         System.out.println(longitude);

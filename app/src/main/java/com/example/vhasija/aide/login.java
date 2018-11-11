@@ -22,15 +22,12 @@ public class login extends AppCompatActivity {
         name = (EditText) findViewById(R.id.Name);
         password = (EditText) findViewById(R.id.Password);
 
+
+
     }
 
-    public void signupform(View view)
-    {
-        Intent intent = new Intent(login.this,Signup.class);
-        startActivity(intent);
-    }
 
-    public void Maps_login(View View)
+    public void Maps_login(View view)
     {
         name_string = name.getText().toString();
         password_string = password.getText().toString();

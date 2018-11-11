@@ -11,7 +11,8 @@
        android:layout_height="wrap_content"
        android:id="@+id/layout6"
        android:orientation="vertical"
-       android:visibility="visible">
+       android:visibility="visible"
+       android:background="@drawable/gradient">
 
    <fragment
        android:id="@+id/map"
@@ -24,9 +25,10 @@
           android:id="@+id/button5"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Button"
+          android:text="Back"
           android:layout_weight=".1"
-          android:onClick="signupform1"/>
+          android:onClick="signupform1"
+          android:background="@drawable/button_style"/>
 
 
    </LinearLayout>
