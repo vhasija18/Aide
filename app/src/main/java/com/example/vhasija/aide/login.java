@@ -38,7 +38,7 @@ public class login extends AppCompatActivity {
         System.out.println("email");
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("application/octet-stream");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"aide_support@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"aideapplicationcanada@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "Contact us");
         i.putExtra(Intent.EXTRA_TEXT   , "");
         try {
