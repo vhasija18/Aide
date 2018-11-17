@@ -1,24 +1,27 @@
 package com.example.vhasija.aide;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-public class Signup extends AppCompatActivity {
+import com.example.wampSync.AsyncResponse;
+import com.example.wampSync.PostResponseAsyncTask;
+
+public class Signup extends AppCompatActivity implements AsyncResponse {
 
 
+    public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     double longitude =00.00;
     double latitude  =00.00;
     RadioButton  user,aide;
@@ -109,8 +112,33 @@ public class Signup extends AppCompatActivity {
 
     public void signup(View view)
     {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
 
-        System.out.println("MIke");
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_CONTACTS)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
+        //phone_value = phone.getText().toString();
+        send_sms();
+        /*System.out.println("MIke");
         if(flag== -1)
           {
 
@@ -132,8 +160,43 @@ public class Signup extends AppCompatActivity {
         System.out.println(pin_value);
         System.out.println(confirmpin_value);
         System.out.println(latitude);
-        System.out.println(longitude);
+        System.out.println(longitude);*/
 
     }
 
+    public void send_sms()
+    {
+        String phnNo = phone.getText().toString();
+        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?phnNo="+phnNo;
+        PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
+            @Override
+            public void processFinish(String s) {
+                Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+            }
+        });
+        task1.execute(url);
+        /*String phoneNo = "+91"+phone.getText().toString();
+        String msg = "Test";//"Welcome to AIDE. Help you need is on fingertips.";
+
+        PendingIntent pi = PendingIntent.getActivity(this, 0,
+                new Intent(this, Signup.class), 0);
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNo, "5455", msg, pi, null);*/
+        /*try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "SMS Sent!",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),
+                    "SMS failed, please try again later!",
+                    Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }*/
+    }
+
+    @Override
+    public void processFinish(String s) {
+        Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+    }
 }
