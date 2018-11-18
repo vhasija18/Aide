@@ -1,11 +1,7 @@
 package com.example.vhasija.aide;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -112,32 +108,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
     public void signup(View view)
     {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CONTACTS},
-                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        } else {
-            // Permission has already been granted
-        }
-        //phone_value = phone.getText().toString();
         send_sms();
+        send_email();
         /*System.out.println("MIke");
         if(flag== -1)
           {
@@ -164,10 +136,26 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
     }
 
-    public void send_sms()
+    private void send_email()
+    {
+        String emailId = email.getText().toString();
+        System.out.println(emailId);
+        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?emailId="+emailId;
+        PostResponseAsyncTask emailtask = new PostResponseAsyncTask(this, new AsyncResponse() {
+            @Override
+            public void processFinish(String s) {
+                Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+            }
+        });
+        emailtask.execute(url);
+
+    }
+
+    private void send_sms()
     {
         String phnNo = phone.getText().toString();
-        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?phnNo="+phnNo;
+        String emailId = email.getText().toString();
+        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?phnNo="+phnNo+"&emailId="+emailId;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {
