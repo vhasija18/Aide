@@ -108,8 +108,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
     public void signup(View view)
     {
-        send_sms();
-        send_email();
+        sendSmsEmail();
         /*System.out.println("MIke");
         if(flag== -1)
           {
@@ -136,22 +135,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
     }
 
-    private void send_email()
-    {
-        String emailId = email.getText().toString();
-        System.out.println(emailId);
-        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?emailId="+emailId;
-        PostResponseAsyncTask emailtask = new PostResponseAsyncTask(this, new AsyncResponse() {
-            @Override
-            public void processFinish(String s) {
-                Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
-            }
-        });
-        emailtask.execute(url);
-
-    }
-
-    private void send_sms()
+    private void sendSmsEmail()
     {
         String phnNo = phone.getText().toString();
         String emailId = email.getText().toString();
