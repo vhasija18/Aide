@@ -6,9 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wampSync.AsyncResponse;
@@ -18,16 +24,18 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
 
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
-    double longitude =00.00;
-    double latitude  =00.00;
+    double longitude =-00.00;
+    double latitude  =-00.00;
     RadioButton  user,aide;
     EditText  name,email,dob,phone,pin,confirmpin;
-    String Occupation[] = {"How can you Help","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
+    String Occupation[] = {"How can you help","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
     String Gender[]= {"Gender","Male","Female"};
     String name_value,email_value,dob_value,phone_value,pin_value,confirmpin_value,
             gender_value,occupation_value;
-    int flag =1;
+    int aide_value ,user_value;
+    int name_flag,email_flag,dob_flag,phone_flag,pin_flag,confirmpin_flag;
     Spinner occupation,gender;
+    Button taglocation;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -39,6 +47,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         dob         = (EditText) findViewById(R.id.signup_dob);
         pin    = (EditText) findViewById(R.id.signup_pin);
         confirmpin = (EditText) findViewById(R.id.signup_confirmpin);
+        taglocation = findViewById(R.id.button3);
+        aide = findViewById(R.id.signup_Aide);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,Gender);
         ArrayAdapter adapter1 = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,Occupation);
         gender.setAdapter(adapter);
@@ -63,6 +73,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         startActivityForResult(intent,10);
     }
     public void  onRadioButtonClicked(View view) {
+        user_value =0;
+        aide_value =0;
         boolean checked = ((RadioButton) view).isChecked();
 
         if (checked)
@@ -70,11 +82,11 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             switch(view.getId())
             {
                 case R.id.signup_User:
-                    //occupation.setEnabled(false);
+                    user_value = 1;
                     occupation.setVisibility(View.GONE);
                     break;
                 case R.id.signup_Aide:
-                    flag =-1;
+                    aide_value = 1;
                     occupation.setVisibility(View.VISIBLE);
                     occupation.setEnabled(true);
                     occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -115,6 +127,13 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
           }
 
+
+        name_flag=0;
+        phone_flag=0;
+        email_flag=0;
+        dob_flag=0;
+        pin_flag=0;
+        confirmpin_flag=0;
         name_value  = name.getText().toString();
         email_value = email.getText().toString();
         phone_value = phone.getText().toString();
@@ -122,6 +141,69 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         pin_value = pin.getText().toString();
         confirmpin_value= confirmpin.getText().toString();
 
+        if(name_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
+            name.setError("Name is missing");
+        }
+        if(email_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
+            email.setError("Email is missing");
+        }
+        if(phone_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
+            phone.setError("Phone number is missing");
+        }
+
+        if(dob_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            dob.setError("Date of birth is missing");
+        }
+        if(pin_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            pin.setError("Please enter your pin");
+
+        }
+
+        if (confirmpin_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            confirmpin.setError("Confirm your pin");
+
+        }
+
+        if (!(confirmpin_value.matches(pin_value)))
+        {
+            Toast.makeText(this,"Pin and Confirm pin doesn't match",Toast.LENGTH_SHORT).show();
+            confirmpin.setError("Doesnot Match");
+        }
+
+        if(gender_value.matches("Gender"))
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            ((TextView)gender.getSelectedView()).setError("Please select gender");
+        }
+
+        if(aide_value ==1)
+        {
+
+            if(occupation_value.matches("How can you help"))
+            {
+                Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+                ((TextView)occupation.getSelectedView()).setError("Please select any option");
+            }
+        }
+
+        if(latitude==-00.00 && longitude==-00.00)
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            taglocation.setError("Tag your location");
+
+        }
         System.out.println(name_value);
         System.out.println(email_value);
         System.out.println(dob_value);

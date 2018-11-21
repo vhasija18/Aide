@@ -12,6 +12,7 @@ public class login extends AppCompatActivity {
 
     EditText name,password;
     String  name_string, password_string;
+    int name_flag,password_flag;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +27,31 @@ public class login extends AppCompatActivity {
 
     public void Maps_login(View view)
     {
+        name_flag=0;
+        password_flag=0;
         name_string = name.getText().toString();
         password_string = password.getText().toString();
 
-        Intent intent = new Intent(login.this,Maps_Login.class);
-        startActivity(intent);
+        System.out.println("Hello name is "+name_string);
+        if(name_string.matches(""))
+        {
+            name_flag=-1;
+            Toast.makeText(this, "Enter the details", Toast.LENGTH_SHORT).show();
+            name.setError("Email/Phone is missing");
+        }
+        if(password_string.matches(""))
+        {
+            password_flag=-1;
+            Toast.makeText(this,"Enter details",Toast.LENGTH_SHORT).show();
+            password.setError("Password is missing");
+        }
+
+        if(name_flag==0 && password_flag==0)
+        {
+
+            Intent intent = new Intent(login.this,ProfilePage.class);
+            startActivity(intent);
+        }
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.vhasija.aide;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -200,8 +201,11 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
-    public void profilepage(View view)
+    public void helppage(View view)
     {
+     Intent intent = new Intent(this,helppage.class);
+     startActivity(intent);
+
     }
 
 }
