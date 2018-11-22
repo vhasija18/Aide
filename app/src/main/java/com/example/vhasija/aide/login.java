@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.wampSync.AsyncResponse;
+import com.example.wampSync.PostResponseAsyncTask;
+
+import org.json.JSONObject;
+
 
 public class login extends AppCompatActivity {
 
@@ -13,6 +18,7 @@ public class login extends AppCompatActivity {
     EditText name,password;
     String  name_string, password_string;
     int name_flag,password_flag;
+    JSONObject jsonobject;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +55,28 @@ public class login extends AppCompatActivity {
         if(name_flag==0 && password_flag==0)
         {
 
-            Intent intent = new Intent(login.this,ProfilePage.class);
-            startActivity(intent);
+            //Intent intent = new Intent(login.this,ProfilePage.class);
+            //startActivity(intent);
+
+            String url = "http://192.168.2.34:8089/android/index.php?Email="+name_string+"&Pin="+Integer.parseInt(password_string);
+            PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
+                @Override
+                public void processFinish(String s) {
+                    Toast.makeText(login.this, s, Toast.LENGTH_LONG).show();
+                    System.out.println(s);
+                    try{
+                        jsonobject = new JSONObject(s);
+                        System.out.println(jsonobject.getString("message"));
+
+                    }catch (Exception e)
+                    {
+                        System.out.println(e);
+                    }
+
+                }
+            });
+            task1.execute(url);
+
         }
 
     }
