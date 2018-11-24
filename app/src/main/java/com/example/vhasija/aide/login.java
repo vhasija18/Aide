@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.wampSync.AsyncResponse;
 import com.example.wampSync.PostResponseAsyncTask;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -58,18 +59,21 @@ public class login extends AppCompatActivity {
             //Intent intent = new Intent(login.this,ProfilePage.class);
             //startActivity(intent);
 
-            String url = "http://192.168.2.34:8089/aide/index.php?Email="+name_string+"&Pin="+Integer.parseInt(password_string);
+            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=login&EmailorPhone="+name_string+"&Pin="+Integer.parseInt(password_string);
             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                 @Override
-                public void processFinish(String s) {
+                public void processFinish(String s) throws JSONException {
                     Toast.makeText(login.this, s, Toast.LENGTH_LONG).show();
                     System.out.println(s);
+
                     try{
-                        jsonobject = new JSONObject(s);
-                        System.out.println(jsonobject.getString("message"));
-                        System.out.println(jsonobject.getString("name"));
-                        System.out.println(jsonobject.getString("phone"));
-                        System.out.println(jsonobject.getString("type"));
+                        //vishwas has to code ahead
+                        JSONObject result = new JSONObject(s.toString()).getJSONObject("result");
+                        System.out.println("first name is:"+result.getString("first_name"));
+                        System.out.println("last name is:"+result.getString("last_name"));
+                        System.out.println("email is:"+result.getString("email"));
+                        System.out.println("phone no is:"+result.getString("phone"));
+                        System.out.println("user type is:"+result.getString("type"));
 
                     }catch (Exception e)
                     {

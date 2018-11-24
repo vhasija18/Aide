@@ -6,34 +6,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wampSync.AsyncResponse;
 import com.example.wampSync.PostResponseAsyncTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Signup extends AppCompatActivity implements AsyncResponse {
 
 
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
-    double longitude =-00.00;
-    double latitude  =-00.00;
+    Double longitude =-00.00;
+    Double latitude  =-00.00;
     RadioButton  user,aide;
     EditText  name,email,dob,phone,pin,confirmpin;
     String Occupation[] = {"How can you help","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
     String Gender[]= {"Gender","Male","Female"};
-    String name_value,email_value,dob_value,phone_value,pin_value,confirmpin_value,
-            gender_value,occupation_value;
-    int aide_value ,user_value;
-    int name_flag,email_flag,dob_flag,phone_flag,pin_flag,confirmpin_flag;
+    String name_value,email_value,dob_value,phone_value,pin_value,confirmpin_value, gender_value,occupation_value;
+    int name_flag,email_flag,dob_flag,phone_flag,pin_flag,confirmpin_flag,user_type=0;
     Spinner occupation,gender;
     Button taglocation;
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender_value= parent.getItemAtPosition(position).toString();
-                System.out.println(gender_value);
+                //System.out.println(gender_value);
             }
 
             @Override
@@ -66,34 +63,33 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         });
         occupation.setAdapter(adapter1);
         occupation.setEnabled(false);
+    }
 
-            }
     public void tagurlocation(View view) {
         Intent intent = new Intent(Signup.this,Maps.class);
         startActivityForResult(intent,10);
     }
+
     public void  onRadioButtonClicked(View view) {
-        user_value =0;
-        aide_value =0;
         boolean checked = ((RadioButton) view).isChecked();
 
-        if (checked)
+        if(checked)
         {
             switch(view.getId())
             {
                 case R.id.signup_User:
-                    user_value = 1;
+                    user_type = 1;
                     occupation.setVisibility(View.GONE);
                     break;
                 case R.id.signup_Aide:
-                    aide_value = 1;
+                    user_type = 2;
                     occupation.setVisibility(View.VISIBLE);
                     occupation.setEnabled(true);
                     occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             occupation_value= parent.getItemAtPosition(position).toString();
-                            System.out.println(occupation_value);
+                            //System.out.println(occupation_value);
                         }
 
                         @Override
@@ -109,7 +105,6 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
 
     public void onActivityResult(int requestCode, int resultCode,Intent data) {
-        System.out.println("Hello");
         System.out.println(requestCode);
         System.out.println(resultCode);
             if (resultCode == RESULT_OK) {
@@ -118,15 +113,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             }
         }
 
-    public void signup(View view)
-    {
-        sendSmsEmail();
-        /*System.out.println("MIke");
-        if(flag== -1)
-          {
-
-          }
-
+    public void signup(View view) throws JSONException {
+        System.out.println("signup");
 
         name_flag=0;
         phone_flag=0;
@@ -141,70 +129,122 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         pin_value = pin.getText().toString();
         confirmpin_value= confirmpin.getText().toString();
 
-        if(name_value.matches(""))
-        {
+        JSONObject json = new JSONObject();
+
+        if(user_type==0){
+            RadioButton lastRadioBtn = (RadioButton) view.findViewById(R.id.signup_User);
+            //Toast.makeText(Signup.this, "Select user type", Toast.LENGTH_SHORT).show();
+        }else{
+            json.put("user_type" , String.valueOf(user_type));
+        }
+
+        if(name_value.matches("")){
             Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
             name.setError("Name is missing");
+        }else{
+            json.put("name" , name_value);
         }
-        if(email_value.matches(""))
-        {
+
+        if(email_value.matches("")){
             Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
             email.setError("Email is missing");
+        }else{
+            json.put("email" , email_value);
         }
-        if(phone_value.matches(""))
-        {
+
+        if(phone_value.matches("")){
             Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
             phone.setError("Phone number is missing");
+        }else{
+            json.put("phone" , phone_value);
         }
 
-        if(dob_value.matches(""))
-        {
+        if(dob_value.matches("")){
             Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
             dob.setError("Date of birth is missing");
+        }else{
+            json.put("dob" , dob_value);
         }
-        if(pin_value.matches(""))
-        {
+
+        if(pin_value.matches("")){
             Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
             pin.setError("Please enter your pin");
-
+        }else{
+            json.put("pin" , pin_value);
         }
 
-        if (confirmpin_value.matches(""))
-        {
+        if(confirmpin_value.matches("")){
             Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
             confirmpin.setError("Confirm your pin");
 
+        }else{
+            json.put("cpin" , confirmpin_value);
         }
 
-        if (!(confirmpin_value.matches(pin_value)))
-        {
+        if(!(confirmpin_value.matches(pin_value))){
             Toast.makeText(this,"Pin and Confirm pin doesn't match",Toast.LENGTH_SHORT).show();
             confirmpin.setError("Doesnot Match");
         }
 
-        if(gender_value.matches("Gender"))
-        {
+        if(gender_value.matches("Gender")){
             Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
             ((TextView)gender.getSelectedView()).setError("Please select gender");
-        }
-
-        if(aide_value ==1)
-        {
-
-            if(occupation_value.matches("How can you help"))
-            {
-                Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-                ((TextView)occupation.getSelectedView()).setError("Please select any option");
+        }else{
+            switch (gender_value) {
+                case "Male":
+                    gender_value = String.valueOf(1);
+                    break;
+                case "Female":
+                    gender_value = String.valueOf(2);
+                    break;
             }
+            json.put("gender", gender_value);
         }
 
-        if(latitude==-00.00 && longitude==-00.00)
-        {
+        if(user_type == 2){
+            if(occupation_value.matches("How can you help")){
+                Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+                ((TextView)occupation.getSelectedView()).setError("Please select your option");
+            }else{
+                switch (occupation_value) {
+                    case "Ambulance":
+                        occupation_value = String.valueOf(1);
+                        break;
+
+                    case "Doctor":
+                        occupation_value = String.valueOf(2);
+                        break;
+
+                    case "Plumber":
+                        occupation_value = String.valueOf(3);
+                        break;
+
+                    case "Electrician":
+                        occupation_value = String.valueOf(4);
+                        break;
+
+                    case "Mechanic":
+                        occupation_value = String.valueOf(5);
+                        break;
+                }
+
+                if(occupation_value!=null || occupation_value=="")
+                    json.put("occupation" , occupation_value);
+            }
+        }else
+            json.put("occupation" , String.valueOf(0));
+
+        if((latitude==-00.00 && longitude==-00.00) || (latitude==null && longitude==null)){
             Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            taglocation.setError("Tag your location");
+            ((TextView)taglocation).setError("Tag your location");
 
+        }else{
+            ((TextView)taglocation).setError(null);
+            json.put("latitude" , String.valueOf(latitude));
+            json.put("longitude" , String.valueOf(longitude));
         }
-        System.out.println(name_value);
+
+        /*System.out.println(name_value);
         System.out.println(email_value);
         System.out.println(dob_value);
         System.out.println(phone_value);
@@ -215,6 +255,16 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         System.out.println(latitude);
         System.out.println(longitude);*/
 
+        String url = "http://192.168.2.36:8089/aide/index.php?RequestType=signup&dataArr="+json;
+        PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
+            @Override
+            public void processFinish(String s) {
+                Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+                System.out.println(s);
+            }
+        });
+        task1.execute(url);
+        //sendSmsEmail();
     }
 
     private void sendSmsEmail()

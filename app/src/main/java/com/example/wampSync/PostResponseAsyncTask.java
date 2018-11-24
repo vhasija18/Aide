@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -241,7 +243,11 @@ public class PostResponseAsyncTask extends AsyncTask<String, Void, String> {
         result = result.trim();
 
         if(asyncResponse != null){
-            asyncResponse.processFinish(result);
+            try {
+                asyncResponse.processFinish(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         if(exception != null) {
