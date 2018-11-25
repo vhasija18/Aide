@@ -67,6 +67,7 @@ function login(){
 function signup(){
 	if(isset($_GET['dataArr'])){
 		$statflag = 0;
+		$msg = "";
 		$dataArr=get_object_vars(json_decode($_GET['dataArr']));
 		$name = $dataArr['name'];
 		$phone = $dataArr['phone'];
@@ -80,14 +81,28 @@ function signup(){
 		$pin = md5($dataArr['pin']);
 		$dbConnection = mysqlConnection();
 		if($dbConnection){
-			$insertQuery = "INSERT INTO `users` (`first_name`, `email`, `phone`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$name','$email','$phone','$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
-			if(mysqli_query($GLOBALS['conn'], $insertQuery)){
-				$statflag = 1;
-			}else
-				echo mysqli_error($GLOBALS['conn']);
+			$emailExistsQuery = "select * from users where email = '$email' LIMIT 1";
+			$emailExists = mysqli_query($GLOBALS['conn'], $emailExistsQuery);
+			if(mysqli_num_rows($emailExists) == 1)
+				$msg = "The email id you have entered already exists, please enter new email id.";
+			$phoneExistsQuery = "select * from users where phone = '$phone' LIMIT 1";
+			$phoneExists = mysqli_query($GLOBALS['conn'], $phoneExistsQuery);
+			if(mysqli_num_rows($phoneExists) == 1)
+				$msg = "The phone no you have entered already exists, please enter new phone no.";
+			if(mysqli_num_rows($emailExists) == 0 && mysqli_num_rows($phoneExists) == 0){
+				$insertQuery = "INSERT INTO `users` (`first_name`, `email`, `phone`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$name','$email','$phone','$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
+				if(mysqli_query($GLOBALS['conn'], $insertQuery)){
+					$statflag = 1;
+					echo "Registered successfully!";
+				}else{
+					echo mysqli_error($GLOBALS['conn']);
+				}
+			}else{
+				echo $msg;
+			}
 		}
 		
 	}
-	echo "Registered successfully!";
+	
 	return $statflag;
 }
