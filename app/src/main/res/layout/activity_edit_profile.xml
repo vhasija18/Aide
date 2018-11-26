@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".edit_profile"
+    android:background="@drawable/gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        >
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Your Profile!"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/Ready"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Name:"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+
+            <EditText
+            android:id="@+id/editprofile_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:layout_weight=".4"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:background="@drawable/textview"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Name:"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+
+            <EditText
+                android:id="@+id/editprofile_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:layout_weight=".4"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:background="@drawable/textview"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+
+            <EditText
+                android:id="@+id/editprofile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:text="Email"
+                android:layout_weight=".4"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:background="@drawable/textview"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+
+            <EditText
+                android:id="@+id/editprofile_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:text="Phone"
+                android:layout_weight=".4"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:background="@drawable/textview"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth:"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+
+            <EditText
+                android:id="@+id/ediinfo_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                android:text="Date"
+                android:layout_weight=".4"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:background="@drawable/textview"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How can you help:"
+                android:textSize="18sp"
+                android:layout_weight=".6"/>
+
+            <Spinner
+                android:id="@+id/editinfo_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".6" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/editinfo_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tage new location!"
+                android:layout_weight=".5"
+                android:background="@drawable/button_style"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/editinfo_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:layout_weight=".5"
+                android:background="@drawable/button_style"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/editinfo_save"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Save Changes"
+            android:background="@drawable/button_style"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            />
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

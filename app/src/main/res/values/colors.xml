@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="textcolor">#BCB77F</color>
+    <color name ="profilepage">#040404</color>
     <color name ="Ready">#FB0404</color>
+    <color name="hyperlink">#0000FF</color>
 </resources>

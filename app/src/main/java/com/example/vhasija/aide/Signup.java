@@ -26,10 +26,10 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
     Double longitude =-00.00;
     Double latitude  =-00.00;
     RadioButton  user,aide;
-    EditText  name,email,dob,phone,pin,confirmpin;
-    String Occupation[] = {"How can you help","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
+    EditText  firstname,lastname,email,dob,phone,pin,confirmpin;
+    String Occupation[] = {"How can you help","Doctor","Ambulance", "Plumber","Mechanic","Electrician"};
     String Gender[]= {"Gender","Male","Female"};
-    String name_value,email_value,dob_value,phone_value,pin_value,confirmpin_value, gender_value,occupation_value;
+    String firstname_value,lastname_value,email_value,dob_value,phone_value,pin_value,confirmpin_value, gender_value,occupation_value;
     int name_flag,email_flag,dob_flag,phone_flag,pin_flag,confirmpin_flag,user_type=0;
     Spinner occupation,gender;
     Button taglocation;
@@ -38,7 +38,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         setContentView(R.layout.activity_signup);
         occupation  = (Spinner) findViewById(R.id.signup_help);
         gender      = (Spinner) findViewById(R.id.signup_gender);
-        name        = (EditText) findViewById(R.id.signup_Name);
+        firstname   = (EditText) findViewById(R.id.signup_FirstName);
+        lastname    =  (EditText) findViewById(R.id.signup_LastName);
         email       = (EditText) findViewById(R.id.signup_email);
         phone       = (EditText) findViewById(R.id.signup_phone);
         dob         = (EditText) findViewById(R.id.signup_dob);
@@ -122,7 +123,8 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         dob_flag=0;
         pin_flag=0;
         confirmpin_flag=0;
-        name_value  = name.getText().toString();
+        firstname_value  = firstname.getText().toString();
+        lastname_value   = lastname.getText().toString();
         email_value = email.getText().toString();
         phone_value = phone.getText().toString();
         dob_value   = dob.getText().toString();
@@ -138,11 +140,20 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             json.put("user_type" , String.valueOf(user_type));
         }
 
-        if(name_value.matches("")){
+        if(firstname_value.matches("")){
             Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
-            name.setError("Name is missing");
+            firstname.setError("First Name is missing");
         }else{
-            json.put("name" , name_value);
+            json.put("firstname" , firstname_value);
+        }
+
+        if (lastname_value.matches(""))
+        {
+            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
+            firstname.setError("Last Name is missing");
+        }
+        else{
+            json.put("lastname",lastname_value);
         }
 
         if(email_value.matches("")){
@@ -255,7 +266,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         System.out.println(latitude);
         System.out.println(longitude);*/
 
-        String url = "http://192.168.2.36:8089/aide/index.php?RequestType=signup&dataArr="+json;
+        String url = "http://192.168.2.34:8089/aide/index.php?RequestType=signup&dataArr="+json;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {
@@ -271,7 +282,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
     {
         String phnNo = phone.getText().toString();
         String emailId = email.getText().toString();
-        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?phnNo="+phnNo+"&emailId="+emailId;
+        String url = "http://192.168.2.34:8089/aide/ConnectExecute.php?phnNo="+phnNo+"&emailId="+emailId;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {

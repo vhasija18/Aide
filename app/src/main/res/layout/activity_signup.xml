@@ -62,21 +62,38 @@
             android:onClick="onRadioButtonClicked"
             android:textSize="20sp"/>
         </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"  >
 
         <EditText
-        android:id="@+id/signup_Name"
+        android:id="@+id/signup_FirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Name:"
+        android:hint="First Name:"
         android:background="@drawable/textview"
         android:padding="10dp"
         android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"    />
+        android:layout_weight=".5"    />
 
+            <EditText
+                android:id="@+id/signup_LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint=" Last Name:"
+                android:background="@drawable/textview"
+                android:padding="10dp"
+                android:textSize="15sp"
+                android:layout_weight=".5"    />
+        </LinearLayout>|
 
     <EditText
         android:id="@+id/signup_email"

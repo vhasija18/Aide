@@ -18,8 +18,8 @@ public class login extends AppCompatActivity {
 
     EditText name,password;
     String  name_string, password_string;
-    int name_flag,password_flag;
-    JSONObject jsonobject;
+    int name_flag,password_flag,login_id;
+    String message;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class login extends AppCompatActivity {
     }
 
 
-    public void Maps_login(View view)
+    public void login(View view)
     {
         name_flag=0;
         password_flag=0;
@@ -59,21 +59,23 @@ public class login extends AppCompatActivity {
             //Intent intent = new Intent(login.this,ProfilePage.class);
             //startActivity(intent);
 
-            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=login&EmailorPhone="+name_string+"&Pin="+Integer.parseInt(password_string);
+            String url = "http://192.168.2.34:8089/aide/index.php?RequestType=login&EmailorPhone="+name_string+"&Pin="+Integer.parseInt(password_string);
             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                 @Override
                 public void processFinish(String s) throws JSONException {
-                    Toast.makeText(login.this, s, Toast.LENGTH_LONG).show();
-                    System.out.println(s);
+                  //  Toast.makeText(login.this, s, Toast.LENGTH_LONG).show();
+                   // System.out.println(s);
 
                     try{
-                        //vishwas has to code ahead
                         JSONObject result = new JSONObject(s.toString()).getJSONObject("result");
-                        System.out.println("first name is:"+result.getString("first_name"));
+                        //message = result.getString("success");
+                        //login_id= result.getInt("id");
+                        profile_page(result);
+                        /*System.out.println("first name is:"+result.getString("first_name"));
                         System.out.println("last name is:"+result.getString("last_name"));
                         System.out.println("email is:"+result.getString("email"));
                         System.out.println("phone no is:"+result.getString("phone"));
-                        System.out.println("user type is:"+result.getString("type"));
+                        System.out.println("user type is:"+result.getString("type"));*/
 
                     }catch (Exception e)
                     {
@@ -102,4 +104,35 @@ public class login extends AppCompatActivity {
         }
     }
 
+    public void profile_page(JSONObject result)
+    {
+
+        try {
+
+
+            message = result.getString("success").toString();
+
+            if(message.matches("true"))
+            {
+                login_id = result.getInt("id");
+                Toast.makeText(login.this,"Login successful",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this,ProfilePage.class);
+                intent.putExtra("Id",login_id);
+                startActivity(intent);
+            }
+
+            else
+            {
+                Toast.makeText(login.this,"Login Fail! Check your details",Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
+
 }
+

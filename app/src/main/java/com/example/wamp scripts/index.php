@@ -30,7 +30,7 @@ function mysqlConnection(){
 }
 
 function login(){
-	
+
 	if(isset($_GET['EmailorPhone']) && isset($_GET['Pin'])){
 		$emailorphone = $_GET['EmailorPhone'];
 		$pin = md5($_GET['Pin']);
@@ -43,12 +43,13 @@ function login(){
 
 			if(mysqli_num_rows($result) > 0){
 				$json['result']['success'] = true;
-				//$json['message'] = "Log in success";
-				$json['result']['first_name'] = $row['first_name'];
-				$json['result']['last_name']= $row['last_name'];
-				$json['result']['email'] = $row['email'];
-				$json['result']['phone'] = $row['phone'];
-				$json['result']['type'] = $row['type'];
+				$json['result']['message'] = "Log in success";
+				$json['result']['id']=$row['id'];
+				//$json['result']['first_name'] = $row['first_name'];
+				//$json['result']['last_name']= $row['last_name'];
+				//$json['result']['email'] = $row['email'];
+				//$json['result']['phone'] = $row['phone'];
+				//$json['result']['type'] = $row['type'];
 
 			}else{
 				$json['result']['success'] = 0;
@@ -69,7 +70,8 @@ function signup(){
 		$statflag = 0;
 		$msg = "";
 		$dataArr=get_object_vars(json_decode($_GET['dataArr']));
-		$name = $dataArr['name'];
+		$firstname = $dataArr['firstname'];
+		$lastname  = $dataArr['lastname'];
 		$phone = $dataArr['phone'];
 		$email = $dataArr['email'];
 		$gender = $dataArr['gender'];
@@ -90,7 +92,7 @@ function signup(){
 			if(mysqli_num_rows($phoneExists) == 1)
 				$msg = "The phone no you have entered already exists, please enter new phone no.";
 			if(mysqli_num_rows($emailExists) == 0 && mysqli_num_rows($phoneExists) == 0){
-				$insertQuery = "INSERT INTO `users` (`first_name`, `email`, `phone`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$name','$email','$phone','$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
+				$insertQuery = "INSERT INTO `users` (`first_name`,`last_name`, `email`, `phone`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$firstname','$lastname','$email','$phone','$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
 				if(mysqli_query($GLOBALS['conn'], $insertQuery)){
 					$statflag = 1;
 					echo "Registered successfully!";
@@ -101,8 +103,8 @@ function signup(){
 				echo $msg;
 			}
 		}
-		
+
 	}
-	
+
 	return $statflag;
 }

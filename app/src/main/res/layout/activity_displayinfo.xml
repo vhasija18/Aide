@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".displayinfo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient"
+        >
+
+
+        <TextView
+            android:id="@+id/displayinfo_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="25sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="100dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="50dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/button_style"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp">
+
+
+                <TextView
+                    android:id="@+id/textview10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name:"
+                    android:layout_weight=".7"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/displayinfo_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name value"
+                    android:textSize="15sp"
+                    android:layout_weight=".3"
+                    />
+
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp">
+
+
+                <TextView
+                    android:id="@+id/textview11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone:"
+                    android:layout_weight=".7"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/displayinfo_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone value"
+                    android:textSize="15sp"
+                    android:layout_weight=".3"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp">
+
+
+                <TextView
+                    android:id="@+id/textview12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:layout_weight=".7"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/displayinfo_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email value"
+                    android:textSize="15sp"
+                    android:layout_weight=".3"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp">
+
+
+                <TextView
+                    android:id="@+id/textview13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gender:"
+                    android:layout_weight=".7"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/displayinfo_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gender value"
+                    android:textSize="15sp"
+                    android:layout_weight=".3"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="20dp">
+
+
+                <TextView
+                    android:id="@+id/textview14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location:"
+                    android:layout_weight=".7"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/displayinfo_loccation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location value"
+                    android:textSize="15sp"
+                    android:layout_weight=".3"
+                    android:autoLink="all"
+                    android:textColor="@color/hyperlink"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
