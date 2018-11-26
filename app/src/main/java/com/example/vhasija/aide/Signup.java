@@ -272,9 +272,12 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             public void processFinish(String s) {
                 Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
                 System.out.println(s);
+                navigatelogin(s);
             }
         });
         task1.execute(url);
+
+
         //sendSmsEmail();
     }
 
@@ -313,5 +316,14 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
     @Override
     public void processFinish(String s) {
         Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+    }
+
+    public void navigatelogin(String s )
+    {
+        if(s.matches("Registered successfully!"))
+        {
+            Intent intent = new Intent(this,login.class);
+            startActivity(intent);
+        }
     }
 }
