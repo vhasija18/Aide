@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wampSync.AsyncResponse;
@@ -17,9 +18,10 @@ import org.json.JSONObject;
 public class helppage extends AppCompatActivity {
 
      Spinner help_spinner;
-    String help_string[] = {"Select","Doctor","Teacher", "Surgeon","Dentist","Fire Figther", "ParaMedic", "Police Officer"};
+    String help_string[] = {"Select a service","Ambulance","Doctor", "Plumber","Electrician","Mechanic"};
     String help_value, helper_name,helper_phone,helper_email,helper_gender,helper_longitude,helper_latitude,message;
     JSONObject jsonobject;
+    int errflag, help_value_int;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helppage);
@@ -30,8 +32,7 @@ public class helppage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                help_value=parent.getItemAtPosition(position).toString();
-               fetchresult(help_value);
-            }
+               }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -40,32 +41,63 @@ public class helppage extends AppCompatActivity {
         });
     }
 
-   public void fetchresult(String help)
+   public void fetch_result(View view)
    {
-       String url = "http://192.168.2.34:8089/aide/gethelp.php?help="+help_value;
-       PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
-           @Override
-           public void processFinish(String s) {
-               Toast.makeText(helppage.this, s, Toast.LENGTH_LONG).show();
-               System.out.println(s);
-              getdetails(s);
-           }
-       });
-       task1.execute(url);
+       if(help_value.matches("Select a service")){
+           errflag = 0;
+           ((TextView)help_spinner.getSelectedView()).setError("please select one option");
+       }else{
+           switch (help_value) {
+               case "Ambulance":
+                   help_value_int = 1;
+                   break;
 
+               case "Doctor":
+                   help_value_int = 2;
+                   break;
+
+               case "Plumber":
+                   help_value_int = 3;
+                   break;
+
+               case "Electrician":
+                   help_value_int = 4;
+                   break;
+
+               case "Mechanic":
+                   help_value_int = 5;
+                   break;
+           }
+
+         }
+
+
+         if (help_value_int !=0) {
+             System.out.println(help_value_int);
+             String url = "http://192.168.2.34:8089/aide/gethelp.php?RequestType=help&help_value="+help_value_int;
+             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
+                 @Override
+                 public void processFinish(String s) {
+                     Toast.makeText(helppage.this, s, Toast.LENGTH_LONG).show();
+                     System.out.println(s);
+                     getdetails(s);
+                 }
+             });
+             task1.execute(url);
+         }
    }
 
    public void getdetails(String s)
    {
        try{
-              jsonobject = new JSONObject(s);
+              jsonobject = new JSONObject(s).getJSONObject("result");
 
               message = jsonobject.getString("message").toString();
               if(message.matches("Help found"))
               {
-                  helper_name =  jsonobject.getString("name").toString();
+                  helper_name =  jsonobject.getString("first_name").toString() + " "+jsonobject.getString("last_name").toString();
                   helper_email = jsonobject.getString("email").toString();
-                  helper_gender= jsonobject.getString("gender").toString();
+                  helper_gender = jsonobject.getString("gender").toString();
                   helper_phone =jsonobject.getString("phone").toString();
                   helper_latitude=jsonobject.getString("latitude").toString();
                   helper_longitude= jsonobject.getString("longitude").toString();
@@ -74,6 +106,7 @@ public class helppage extends AppCompatActivity {
 
                   intent.putExtra("helper_name",helper_name);
                   intent.putExtra("helper_email",helper_email);
+                  intent.putExtra("help",help_value);
                   intent.putExtra("helper_gender",helper_gender);
                   intent.putExtra("helper_phone",helper_phone);
                   intent.putExtra("helper_latitude",helper_latitude);

@@ -15,9 +15,6 @@
         android:gravity="center">
 
 
-
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -33,6 +30,17 @@
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
         android:background="@drawable/textview"/>
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find Help!"
+            android:background="@drawable/button_style"
+            android:onClick="fetch_result"/>
+
 
     </LinearLayout>
 

@@ -269,12 +269,13 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         }
 
         if(errflag == 1){
-            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=signup&dataArr="+json;
+            String url = "http://192.168.2.34:8089/aide/index.php?RequestType=signup&dataArr="+json;
             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                 @Override
                 public void processFinish(String s) {
                     Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
                     System.out.println(s);
+                    navigatelogin(s);
                 }
             });
             task1.execute(url);
