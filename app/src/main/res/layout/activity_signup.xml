@@ -21,11 +21,10 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lets get ready"
-            android:textSize="25sp"
             android:layout_marginBottom="30dp"
             android:textColor="@color/Ready"
-            android:textStyle="bold"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,64 +69,72 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"  >
 
-        <EditText
-        android:id="@+id/signup_FirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="First Name:"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_weight=".5"    />
+            <EditText
+                android:id="@+id/signup_FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="@drawable/textview"
+                android:ems="10"
+                android:hint="First Name:"
+                android:inputType="textPersonName"
+                android:maxLength="15"
+                android:padding="10dp"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/signup_LastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint=" Last Name:"
+                android:layout_weight=".5"
                 android:background="@drawable/textview"
+                android:ems="10"
+                android:hint=" Last Name:"
+                android:inputType="textPersonName"
+                android:maxLength="15"
                 android:padding="10dp"
-                android:textSize="15sp"
-                android:layout_weight=".5"    />
+                android:textSize="15sp" />
         </LinearLayout>|
 
-    <EditText
-        android:id="@+id/signup_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint= "Enter Your Email Id"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
+            <EditText
+                android:id="@+id/signup_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/textview"
+                android:clickable="true"
+                android:ems="10"
+                android:hint="Email id"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:padding="10dp"
+                android:textSize="15sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout2"
         android:orientation="horizontal"
         android:visibility="visible">
-    <EditText
-        android:id="@+id/signup_dob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:layout_weight=".60"
-        android:hint="Date of Birth : DD/MM/YYYY"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
+
+        <EditText
+            android:id="@+id/signup_dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight=".60"
+            android:background="@drawable/textview"
+            android:clickable="true"
+            android:ems="10"
+            android:focusable="false"
+            android:hint=" Select your date of birth"
+            android:inputType="date"
+            android:onClick="datePickerPopup"
+            android:padding="10dp"
+            android:textSize="15sp" />
 
         <Spinner
             android:id="@+id/signup_gender"
@@ -139,20 +146,20 @@
     </LinearLayout>
 
 
-
-    <EditText
-        android:id="@+id/signup_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint="Enter Your Phone number"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
+            <EditText
+                android:id="@+id/signup_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/textview"
+                android:ems="10"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:padding="10dp"
+                android:textSize="15sp" />
 
 
         <Spinner
@@ -164,36 +171,35 @@
             android:visibility="gone"/>
 
 
+            <EditText
+                android:id="@+id/signup_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/textview"
+                android:ems="10"
+                android:hint="Enter Pin"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:padding="10dp"
+                android:textSize="15sp" />
 
-
-    <EditText
-        android:id="@+id/signup_pin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberPassword"
-        android:hint="Enter Pin"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"/>
-
-    <EditText
-        android:id="@+id/signup_confirmpin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberPassword"
-        android:hint="Confirm Pin"
-        android:background="@drawable/textview"
-        android:padding="10dp"
-        android:textSize="15sp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        />
+            <EditText
+                android:id="@+id/signup_confirmpin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/textview"
+                android:ems="10"
+                android:hint="Confirm Pin"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:padding="10dp"
+                android:textSize="15sp" />
 
         </LinearLayout>
     <LinearLayout
@@ -204,25 +210,26 @@
         android:visibility="visible"
         >
 
-    <Button
+        <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tag your location"
-            android:layout_weight=".5"
-            android:onClick="tagurlocation"
-            android:background="@drawable/button_style"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_weight=".5"
+            android:background="@drawable/button_style"
+            android:onClick="tagurlocation"
+            android:text="Tag your location" />
+
         <Button
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:onClick="signup"
-            android:layout_weight=".5"
             android:layout_marginRight="10dp"
-            android:background="@drawable/button_style"/>
+            android:layout_weight=".5"
+            android:background="@drawable/button_style"
+            android:onClick="signup"
+            android:text="Sign up" />
     </LinearLayout>
     </LinearLayout>
 

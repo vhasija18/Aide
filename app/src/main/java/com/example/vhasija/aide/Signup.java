@@ -1,5 +1,7 @@
 package com.example.vhasija.aide;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -19,18 +22,18 @@ import com.example.wampSync.PostResponseAsyncTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 public class Signup extends AppCompatActivity implements AsyncResponse {
 
-
-    public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     Double longitude =-00.00;
     Double latitude  =-00.00;
     RadioButton  user,aide;
     EditText  firstname,lastname,email,dob,phone,pin,confirmpin;
-    String Occupation[] = {"How can you help","Doctor","Ambulance", "Plumber","Mechanic","Electrician"};
-    String Gender[]= {"Gender","Male","Female"};
+    String Occupation[] = {"Select a service","Doctor","Ambulance", "Plumber","Mechanic","Electrician"};
+    String Gender[]= {"Select your gender","Male","Female"};
     String firstname_value,lastname_value,email_value,dob_value,phone_value,pin_value,confirmpin_value, gender_value,occupation_value;
-    int name_flag,email_flag,dob_flag,phone_flag,pin_flag,confirmpin_flag,user_type=0;
+    int user_type=0;
     Spinner occupation,gender;
     Button taglocation;
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,23 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         });
         occupation.setAdapter(adapter1);
         occupation.setEnabled(false);
+    }
+
+    public void datePickerPopup(View view){
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Signup.this,
+                AlertDialog.THEME_DEVICE_DEFAULT_DARK,new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker view, int year,int monthOfYear, int dayOfMonth){
+                    // set day of month , month and year value in the edit text
+                    dob.setError(null);
+                    dob.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
     public void tagurlocation(View view) {
@@ -109,20 +129,16 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         System.out.println(requestCode);
         System.out.println(resultCode);
             if (resultCode == RESULT_OK) {
+                ((TextView)taglocation).setError(null);
                 longitude = data.getExtras().getDouble("Longi");
                 latitude  = data.getExtras().getDouble("Lati");
             }
         }
 
-    public void signup(View view) throws JSONException {
+    public void signup(View view) throws JSONException, JSONException {
         System.out.println("signup");
 
-        name_flag=0;
-        phone_flag=0;
-        email_flag=0;
-        dob_flag=0;
-        pin_flag=0;
-        confirmpin_flag=0;
+        int errflag = 1;
         firstname_value  = firstname.getText().toString();
         lastname_value   = lastname.getText().toString();
         email_value = email.getText().toString();
@@ -134,72 +150,71 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         JSONObject json = new JSONObject();
 
         if(user_type==0){
+            errflag = 0;
             RadioButton lastRadioBtn = (RadioButton) view.findViewById(R.id.signup_User);
-            //Toast.makeText(Signup.this, "Select user type", Toast.LENGTH_SHORT).show();
         }else{
             json.put("user_type" , String.valueOf(user_type));
         }
 
-        if(firstname_value.matches("")){
-            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
-            firstname.setError("First Name is missing");
+        if((!firstname_value.matches("^[a-zA-Z]+$")) || (lastname_value.matches(""))){
+            errflag = 0;
+            firstname.setError("please enter a valid first name");
         }else{
             json.put("firstname" , firstname_value);
         }
 
-        if (lastname_value.matches(""))
-        {
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            firstname.setError("Last Name is missing");
+        if ((!lastname_value.matches("^[a-zA-Z]+$")) || (lastname_value.matches(""))){
+            errflag = 0;
+            lastname.setError("please enter a valid last name");
         }
         else{
             json.put("lastname",lastname_value);
         }
 
-        if(email_value.matches("")){
-            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
-            email.setError("Email is missing");
+        if((!email_value.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) || (email_value.matches(""))){
+            errflag = 0;
+            email.setError("please enter a valid email id");
         }else{
             json.put("email" , email_value);
         }
 
-        if(phone_value.matches("")){
-            Toast.makeText(this,"All fields are required", Toast.LENGTH_SHORT).show();
-            phone.setError("Phone number is missing");
+        if(!phone_value.matches("^\\d{10}$")){
+            errflag = 0;
+            phone.setError("please enter a valid 10 digits phone number");
         }else{
             json.put("phone" , phone_value);
         }
 
-        if(dob_value.matches("")){
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            dob.setError("Date of birth is missing");
+        if(!dob_value.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")){
+            errflag = 0;
+            dob.setError("please enter a valid date of birth");
         }else{
+            System.out.println(dob_value);
             json.put("dob" , dob_value);
         }
 
-        if(pin_value.matches("")){
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            pin.setError("Please enter your pin");
+        if(!pin_value.matches("^\\d{4}$")){
+            errflag = 0;
+            pin.setError("Please enter a valid 4 digit pin");
         }else{
             json.put("pin" , pin_value);
         }
 
-        if(confirmpin_value.matches("")){
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            confirmpin.setError("Confirm your pin");
-
+        if(!confirmpin_value.matches("^\\d{4}$")){
+            errflag = 0;
+            confirmpin.setError("please enter a valid 4 digit pin");
         }else{
             json.put("cpin" , confirmpin_value);
         }
 
         if(!(confirmpin_value.matches(pin_value))){
-            Toast.makeText(this,"Pin and Confirm pin doesn't match",Toast.LENGTH_SHORT).show();
-            confirmpin.setError("Doesnot Match");
+            errflag = 0;
+            confirmpin.setError("pin and confirm should be same");
         }
 
-        if(gender_value.matches("Gender")){
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            ((TextView)gender.getSelectedView()).setError("Please select gender");
+        if((gender_value.matches("Select your gender"))){
+            errflag = 0;
+            ((TextView)gender.getSelectedView()).setError("please select gender");
         }else{
             switch (gender_value) {
                 case "Male":
@@ -213,9 +228,9 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         }
 
         if(user_type == 2){
-            if(occupation_value.matches("How can you help")){
-                Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-                ((TextView)occupation.getSelectedView()).setError("Please select your option");
+            if(occupation_value.matches("Select a service")){
+                errflag = 0;
+                ((TextView)occupation.getSelectedView()).setError("please select one option");
             }else{
                 switch (occupation_value) {
                     case "Ambulance":
@@ -246,46 +261,33 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             json.put("occupation" , String.valueOf(0));
 
         if((latitude==-00.00 && longitude==-00.00) || (latitude==null && longitude==null)){
-            Toast.makeText(this,"All fields are required",Toast.LENGTH_SHORT).show();
-            ((TextView)taglocation).setError("Tag your location");
-
+            errflag = 0;
+            ((TextView)taglocation).setError("please select your location");
         }else{
-            ((TextView)taglocation).setError(null);
             json.put("latitude" , String.valueOf(latitude));
             json.put("longitude" , String.valueOf(longitude));
         }
 
-        /*System.out.println(name_value);
-        System.out.println(email_value);
-        System.out.println(dob_value);
-        System.out.println(phone_value);
-        System.out.println(gender_value);
-        System.out.println(occupation_value);
-        System.out.println(pin_value);
-        System.out.println(confirmpin_value);
-        System.out.println(latitude);
-        System.out.println(longitude);*/
+        if(errflag == 1){
+            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=signup&dataArr="+json;
+            PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
+                @Override
+                public void processFinish(String s) {
+                    Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
+                    System.out.println(s);
+                }
+            });
+            task1.execute(url);
+            //sendSmsEmail();
+        }else
+            Toast.makeText(this,"One or the other detail entered is either not entered or invalid",Toast.LENGTH_SHORT).show();
 
-        String url = "http://192.168.2.34:8089/aide/index.php?RequestType=signup&dataArr="+json;
-        PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
-            @Override
-            public void processFinish(String s) {
-                Toast.makeText(Signup.this, s, Toast.LENGTH_LONG).show();
-                System.out.println(s);
-                navigatelogin(s);
-            }
-        });
-        task1.execute(url);
-
-
-        //sendSmsEmail();
     }
 
-    private void sendSmsEmail()
-    {
+    private void sendSmsEmail() {
         String phnNo = phone.getText().toString();
         String emailId = email.getText().toString();
-        String url = "http://192.168.2.34:8089/aide/ConnectExecute.php?phnNo="+phnNo+"&emailId="+emailId;
+        String url = "http://192.168.2.36:8089/aide/ConnectExecute.php?phnNo="+phnNo+"&emailId="+emailId;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {

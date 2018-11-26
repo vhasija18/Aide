@@ -92,7 +92,7 @@ function signup(){
 			if(mysqli_num_rows($phoneExists) == 1)
 				$msg = "The phone no you have entered already exists, please enter new phone no.";
 			if(mysqli_num_rows($emailExists) == 0 && mysqli_num_rows($phoneExists) == 0){
-				$insertQuery = "INSERT INTO `users` (`first_name`,`last_name`, `email`, `phone`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$firstname','$lastname','$email','$phone','$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
+				$insertQuery = "INSERT INTO `users` (`first_name`,`last_name`, `email`, `phone`, `dob`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$firstname','$lastname','$email','$phone',STR_TO_DATE('$dob', '%d/%m/%Y'),'$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
 				if(mysqli_query($GLOBALS['conn'], $insertQuery)){
 					$statflag = 1;
 					echo "Registered successfully!";

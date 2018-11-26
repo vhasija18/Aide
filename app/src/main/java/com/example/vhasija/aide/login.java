@@ -91,7 +91,6 @@ public class login extends AppCompatActivity {
     }
 
     public void contactUs(View view){
-        System.out.println("email");
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("application/octet-stream");
         i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"aideapplicationcanada@gmail.com"});
