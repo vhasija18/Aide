@@ -50,8 +50,7 @@ function fetchdetails(){
 				$json['result']['last_name']=$row['last_name'];
 			  	$json['result']['email'] = $row['email'];
 			 	$json['result']['phone'] = $row['phone'];
-			 	$json['result']['Dob'] = $row['dob'];
-				$json['result']['type'] = $row['type'];
+			 	$json['result']['type'] = $row['type'];
 				$json['result']['occupation'] = $row['occupation'];
 				$json['result']['longitude'] = $row['longitude'];
 				$json['result']['latitude'] = $row['latitude'];

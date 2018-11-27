@@ -56,6 +56,8 @@
         <activity android:name=".helppage" />
         <activity android:name=".displayinfo" />
         <activity android:name=".EditProfile" />
+        <activity android:name=".change_password" />
+        <activity android:name=".Tag_new_loaction"></activity>
     </application>
 
 </manifest>

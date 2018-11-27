@@ -3,6 +3,7 @@ package com.example.vhasija.aide;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,7 +15,7 @@ public class EditProfile extends AppCompatActivity {
     String firstname_value,lastname_value,email_value,dob_value;
     Integer id_value,help_value;
     Long phone_Value;
-    String help_input[]={"","Ambulance","Doctor","Plumber","Electrician","Mechanic"};
+    String help_input[]={"Select a service","Ambulance","Doctor","Plumber","Electrician","Mechanic"};
 
 
     @Override
@@ -46,5 +47,19 @@ public class EditProfile extends AppCompatActivity {
 
 
 
+    }
+
+    public void changepin(View view)
+    {
+        Intent intent = new Intent(this,change_password.class);
+        intent.putExtra("id",id_value);
+        startActivity(intent);
+    }
+
+    public void  tagnewloc(View view)
+    {
+        Intent intent = new Intent(this, Tag_new_loaction.class);
+        intent.putExtra("id",id_value);
+        startActivity(intent);
     }
 }
