@@ -95,14 +95,14 @@ public class change_password extends AppCompatActivity {
             finish();
             navigatelogin("login");
         }else if (s.matches("No match")){
-            Toast.makeText(this,"Old pin is s. Try again!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Old pin is incorrect Try again!",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this,"error", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void navigatelogin(String s){
-        if(s.matches("login")){
+    public void navigatelogin(String msg){
+        if(msg.matches("login")){
             Intent intent = new Intent(this,login.class);
             startActivity(intent);
         }
