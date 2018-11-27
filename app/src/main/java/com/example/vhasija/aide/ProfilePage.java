@@ -1,12 +1,10 @@
 package com.example.vhasija.aide;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +62,7 @@ public class ProfilePage extends AppCompatActivity {
 
     public void fetchdetails (Integer id)
     {
-        String url = "http://192.168.2.34:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
+        String url = "http://192.168.2.36:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {
