@@ -41,6 +41,8 @@ function fetchdetails(){
 			$row = mysqli_fetch_array($result);
 
 			if(mysqli_num_rows($result) > 0){
+				$dobString = DateTime::createFromFormat('Y-m-d', $row['dob']);
+				$json['result']['dob'] = $dobString->format('d/m/Y');
 				$json['result']['success'] = true;
 				$json['result']['message'] = "Fetched";
 				$json['result']['id'] = $row['id'];
@@ -48,7 +50,7 @@ function fetchdetails(){
 				$json['result']['last_name']=$row['last_name'];
 			  	$json['result']['email'] = $row['email'];
 			 	$json['result']['phone'] = $row['phone'];
-			 	//$json['result']['Dob'] = $row['Dob'];
+			 	$json['result']['Dob'] = $row['dob'];
 				$json['result']['type'] = $row['type'];
 				$json['result']['occupation'] = $row['occupation'];
 				$json['result']['longitude'] = $row['longitude'];

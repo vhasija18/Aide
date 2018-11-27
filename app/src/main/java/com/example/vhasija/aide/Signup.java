@@ -136,7 +136,6 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         }
 
     public void signup(View view) throws JSONException, JSONException {
-        System.out.println("signup");
 
         int errflag = 1;
         firstname_value  = firstname.getText().toString();
@@ -151,7 +150,6 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
         if(user_type==0){
             errflag = 0;
-            RadioButton lastRadioBtn = (RadioButton) view.findViewById(R.id.signup_User);
         }else{
             json.put("user_type" , String.valueOf(user_type));
         }
@@ -269,7 +267,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
         }
 
         if(errflag == 1){
-            String url = "http://192.168.2.34:8089/aide/index.php?RequestType=signup&dataArr="+json;
+            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=signup&dataArr="+json;
             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                 @Override
                 public void processFinish(String s) {
