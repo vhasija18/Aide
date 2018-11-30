@@ -63,11 +63,9 @@ public class displayinfo extends AppCompatActivity {
         phone.setText(intent.getExtras().getString("helper_phone").toString());
         location.setText(address+" \n"+"http://maps.google.com/?q="+intent.getExtras().getDouble("helper_latitude")+","+intent.getExtras().getDouble("helper_longitude"));
         location.setMovementMethod(LinkMovementMethod.getInstance());
-        if(intent.getExtras().getString("helper_gender").toString()=="1")
-        {
+        if(intent.getExtras().getString("helper_gender").toString()=="1"){
          gender.setText("Male");
-        }
-        else{
+        }else{
          gender.setText("Female");
         }
     }
