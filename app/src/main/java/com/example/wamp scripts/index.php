@@ -95,7 +95,7 @@ function signup(){
 				$insertQuery = "INSERT INTO `users` (`first_name`,`last_name`, `email`, `phone`, `dob`, `pin`, `gender`, `occupation`, `latitude`, `longitude`, `type`) VALUES ('$firstname','$lastname','$email','$phone',STR_TO_DATE('$dob', '%d/%m/%Y'),'$pin','$gender','$occupation','$latitude','$longitude','$user_type')";
 				if(mysqli_query($GLOBALS['conn'], $insertQuery)){
 					$statflag = 1;
-					echo "Registered successfully!";
+					echo "Registered successfully! Please login using your details.";
 				}else{
 					echo mysqli_error($GLOBALS['conn']);
 				}

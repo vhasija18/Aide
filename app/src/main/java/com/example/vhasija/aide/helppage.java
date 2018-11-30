@@ -17,13 +17,17 @@ import org.json.JSONObject;
 
 public class helppage extends AppCompatActivity {
 
-     Spinner help_spinner;
+    Spinner help_spinner;
     String help_string[] = {"Select a service","Ambulance","Doctor", "Plumber","Electrician","Mechanic"};
     String help_value, helper_name,helper_phone,helper_email,helper_gender,helper_longitude,helper_latitude,message;
+    int errflag,help_value_int;
+    double latitude,longitude;
     JSONObject jsonobject;
-    int errflag, help_value_int;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        latitude=intent.getExtras().getDouble("latitude");
+        longitude=intent.getExtras().getDouble("longitude");
         setContentView(R.layout.activity_helppage);
         help_spinner= findViewById(R.id.helpspinner);
         ArrayAdapter adapter1 = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,help_string);
@@ -74,7 +78,7 @@ public class helppage extends AppCompatActivity {
 
          if (help_value_int !=0) {
              System.out.println(help_value_int);
-             String url = "http://192.168.2.34:8089/aide/gethelp.php?RequestType=help&help_value="+help_value_int;
+             String url = "http://192.168.2.36:8089/aide/gethelp.php?RequestType=help&help_value="+help_value_int+"&latitude="+latitude+"&longitude="+longitude;
              PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                  @Override
                  public void processFinish(String s) {

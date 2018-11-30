@@ -154,7 +154,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             json.put("user_type" , String.valueOf(user_type));
         }
 
-        if((!firstname_value.matches("^[a-zA-Z]+$")) || (lastname_value.matches(""))){
+        if((!firstname_value.matches("^[a-zA-Z]+$")) || (firstname_value.matches(""))){
             errflag = 0;
             firstname.setError("please enter a valid first name");
         }else{

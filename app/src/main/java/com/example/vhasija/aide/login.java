@@ -59,7 +59,7 @@ public class login extends AppCompatActivity {
             //Intent intent = new Intent(login.this,ProfilePage.class);
             //startActivity(intent);
 
-            String url = "http://192.168.2.34:8089/aide/index.php?RequestType=login&EmailorPhone="+name_string+"&Pin="+Integer.parseInt(password_string);
+            String url = "http://192.168.2.36:8089/aide/index.php?RequestType=login&EmailorPhone="+name_string+"&Pin="+Integer.parseInt(password_string);
             PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                 @Override
                 public void processFinish(String s) throws JSONException {

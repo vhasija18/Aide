@@ -1,6 +1,7 @@
 package com.example.vhasija.aide;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -85,6 +86,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         mGoogleApiClient.connect();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(Bundle bundle) {
 

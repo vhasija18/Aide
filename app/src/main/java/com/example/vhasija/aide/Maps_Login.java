@@ -1,6 +1,7 @@
 package com.example.vhasija.aide;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -36,8 +37,8 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-
-
+    public double latitude ;
+    public double longitude;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,7 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
         mGoogleApiClient.connect();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(Bundle bundle) {
 
@@ -113,6 +115,8 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
@@ -203,9 +207,11 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
 
     public void helppage(View view)
     {
-     Intent intent = new Intent(this,helppage.class);
-     startActivity(intent);
-
+        System.out.println("here");
+        Intent intent = new Intent(this,helppage.class);
+        intent.putExtra("latitude",latitude);
+        intent.putExtra("longitude",longitude);
+        startActivity(intent);
     }
 
 }

@@ -30,11 +30,13 @@ function mysqlConnection(){
 function gethelp(){
 	
 	if(isset($_GET['help_value'])){
+		$latitude = $_GET['latitude'];
+		$longitude  = $_GET['longitude'];
 		$help_value = $_GET['help_value'];
 		$dbConnection = mysqlConnection();
 		if($dbConnection){
 			$json['result'] = array();
-			$query = "select * from users where Occupation = '$help_value' and Type = '2' LIMIT 1";
+			$query = "SELECT *, ( 3959 * acos ( cos ( radians('$latitude') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('$longitude') ) + sin ( radians('$latitude') ) * sin( radians( latitude ) ) ) ) AS distance FROM `users` WHERE occupation = '$help_value' and type = 2  HAVING distance < 30 ORDER BY distance LIMIT 0 , 5";
 			$result = mysqli_query($GLOBALS['conn'], $query);
 			$row = mysqli_fetch_array($result);
 
