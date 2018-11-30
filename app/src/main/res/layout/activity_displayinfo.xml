@@ -165,11 +165,11 @@
                     android:id="@+id/displayinfo_loccation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Location value"
-                    android:textSize="15sp"
                     android:layout_weight=".3"
                     android:autoLink="all"
-                    android:textColor="@color/hyperlink"/>
+                    android:text="Location value"
+                    android:textColor="@color/common_google_signin_btn_text_light_default"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 

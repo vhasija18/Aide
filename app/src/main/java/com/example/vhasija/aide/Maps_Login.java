@@ -39,15 +39,14 @@ public class Maps_Login extends FragmentActivity implements OnMapReadyCallback,
     LocationRequest mLocationRequest;
     public double latitude ;
     public double longitude;
-    String name,email;
-    long phone;
+    String name,email, phone;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps__login);
         Intent intent = getIntent();
         name = intent.getExtras().getString("name").toString();
         email= intent.getExtras().getString("email").toString();
-        phone = intent.getExtras().getLong("phone");
+        phone = intent.getExtras().getString("phone");
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
