@@ -19,15 +19,20 @@ public class helppage extends AppCompatActivity {
 
     Spinner help_spinner;
     String help_string[] = {"Select a service","Ambulance","Doctor", "Plumber","Electrician","Mechanic"};
-    String help_value, helper_name,helper_phone,helper_email,helper_gender,helper_longitude,helper_latitude,message;
+    String help_value, helper_name,helper_email,helper_gender,user_name,user_email,message;
     int errflag,help_value_int;
-    double latitude,longitude;
+    Long helper_phone,user_phone;
+    double user_latitude,user_longitude,helper_longitude,helper_latitude;
     JSONObject jsonobject;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        latitude=intent.getExtras().getDouble("latitude");
-        longitude=intent.getExtras().getDouble("longitude");
+        user_latitude=intent.getExtras().getDouble("user_latitude");
+        user_longitude=intent.getExtras().getDouble("user_longitude");
+        user_name = intent.getExtras().getString("user_name").toString();
+        user_email = intent.getExtras().getString("user_email").toString();
+        user_phone = intent.getExtras().getLong("user_phone");
+        System.out.println(user_name + " "+ " "+user_phone+" "+user_email+" "+user_latitude+" "+user_longitude);
         setContentView(R.layout.activity_helppage);
         help_spinner= findViewById(R.id.helpspinner);
         ArrayAdapter adapter1 = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,help_string);
@@ -78,7 +83,7 @@ public class helppage extends AppCompatActivity {
 
          if (help_value_int !=0) {
              System.out.println(help_value_int);
-             String url = "http://192.168.2.36:8089/aide/gethelp.php?RequestType=help&help_value="+help_value_int+"&latitude="+latitude+"&longitude="+longitude;
+             String url = "http://192.168.2.34:8089/aide/gethelp.php?RequestType=help&help_value="+help_value_int+"&latitude="+user_latitude+"&longitude="+user_longitude;
              PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
                  @Override
                  public void processFinish(String s) {
@@ -102,9 +107,9 @@ public class helppage extends AppCompatActivity {
                   helper_name =  jsonobject.getString("first_name").toString() + " "+jsonobject.getString("last_name").toString();
                   helper_email = jsonobject.getString("email").toString();
                   helper_gender = jsonobject.getString("gender").toString();
-                  helper_phone =jsonobject.getString("phone").toString();
-                  helper_latitude=jsonobject.getString("latitude").toString();
-                  helper_longitude= jsonobject.getString("longitude").toString();
+                  helper_phone =jsonobject.getLong("phone");
+                  helper_latitude=jsonobject.getDouble("latitude");
+                  helper_longitude= jsonobject.getDouble("longitude");
 
                   Intent intent = new Intent(this,displayinfo.class);
 

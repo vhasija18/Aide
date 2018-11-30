@@ -56,18 +56,21 @@ public class ProfilePage extends AppCompatActivity {
     {
 
         Intent intent = new Intent(this,Maps_Login.class);
+        intent.putExtra("name",firstname_sql+" "+lastname_sql);
+        intent.putExtra("phone",phone_sql);
+        intent.putExtra("email",email_sql);
         startActivity(intent);
     }
 
 
     public void fetchdetails (Integer id)
     {
-        String url = "http://192.168.2.36:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
+        String url = "http://192.168.2.34:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {
-                Toast.makeText(ProfilePage.this, s, Toast.LENGTH_LONG).show();
-                System.out.println(s);
+               // Toast.makeText(ProfilePage.this, s, Toast.LENGTH_LONG).show();
+               System.out.println(s);
                 extractdetails(s);
             }
         });
