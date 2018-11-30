@@ -14,6 +14,9 @@ if(isset($_GET['RequestType'])){
 
 		case 'signup' : signup();
 			break;
+			
+		case 'update' : update();
+			break;
 
 		// other cases
 	}
@@ -107,4 +110,49 @@ function signup(){
 	}
 
 	return $statflag;
+}
+
+function update(){
+	if(isset($_GET['dataArr'])){
+		$json['result'] = array();
+		$json['result'] = false;
+		$msg = "";
+		$dataArr=get_object_vars(json_decode($_GET['dataArr']));
+		$id = $dataArr['id'];
+		$firstname = $dataArr['firstname'];
+		$lastname  = $dataArr['lastname'];
+		$phone = $dataArr['phone'];
+		$email = $dataArr['email'];
+		$dob = $dataArr['dob'];
+		$dbConnection = mysqlConnection();
+		if($dbConnection){
+			$emailExistsQuery = "select * from users where email = '$email' LIMIT 1";
+			$emailExists = mysqli_query($GLOBALS['conn'], $emailExistsQuery);
+			if(mysqli_num_rows($emailExists) == 1){
+				$json['result'] = "email";
+				$msg = "The email id you have entered already exists, please enter new email id.";
+			}
+			$phoneExistsQuery = "select * from users where phone = '$phone' LIMIT 1";
+			$phoneExists = mysqli_query($GLOBALS['conn'], $phoneExistsQuery);
+			if(mysqli_num_rows($phoneExists) == 1){
+				$json['result'] = "phone";
+				$msg = "The phone no you have entered already exists, please enter new phone no.";
+			}
+			
+			if(mysqli_num_rows($emailExists) == 0 && mysqli_num_rows($phoneExists) == 0){
+				$insertQuery = "update `users` set `first_name` = '$firstname',`last_name` = '$lastname',`email` = '$email',`phone` = '$phone',`dob` = STR_TO_DATE('$dob', '%d/%m/%Y') where `id` = '$id'";
+				if(mysqli_query($GLOBALS['conn'], $insertQuery)){
+					$json['result'] = true;
+					$msg = "updated";
+				}else{
+					echo mysqli_error($GLOBALS['conn']);
+				}
+			}/*else{
+				echo $msg;
+			}*/
+		}
+	}
+	
+	print_r(json_encode($json));
+	//return json_encode($json);
 }

@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wampSync.AsyncResponse;
 import com.example.wampSync.PostResponseAsyncTask;
@@ -16,8 +15,8 @@ import org.json.JSONObject;
 public class ProfilePage extends AppCompatActivity {
 
     TextView name, phone,email,dob;
-    String firstname_sql,lastname_sql,email_sql,dob_sql,success;
-    Long phone_sql;
+    String firstname_sql,lastname_sql,phone_sql,email_sql,dob_sql,success;
+    //Long phone_sql;
     double latitude_sql,longitutde_sql;
     int id,type_sql,occupation_sql;
     Button need_help,profile_edit;
@@ -65,7 +64,7 @@ public class ProfilePage extends AppCompatActivity {
 
     public void fetchdetails (Integer id)
     {
-        String url = "http://192.168.2.34:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
+        String url = "http://192.168.2.36:8089/aide/fetchdetails.php?RequestType=fetch&id="+id;
         PostResponseAsyncTask task1 = new PostResponseAsyncTask(this, new AsyncResponse() {
             @Override
             public void processFinish(String s) {
@@ -90,7 +89,7 @@ public class ProfilePage extends AppCompatActivity {
                firstname_sql = jsonObject.getString("first_name");
                lastname_sql  = jsonObject.getString("last_name");
                email_sql     = jsonObject.getString("email");
-               phone_sql     = jsonObject.getLong("phone");
+               phone_sql     = jsonObject.getString("phone");
                dob_sql       = jsonObject.getString("dob");
                type_sql      = jsonObject.getInt("type");
                occupation_sql= jsonObject.getInt("occupation");
@@ -99,7 +98,7 @@ public class ProfilePage extends AppCompatActivity {
                name.setText(firstname_sql +" "+lastname_sql);
                email.setText(email_sql);
                dob.setText(dob_sql);
-               phone.setText(phone_sql.toString());
+               phone.setText(phone_sql);
                if(type_sql == 2)
                {
                    need_help.setVisibility(View.INVISIBLE);

@@ -176,7 +176,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
             json.put("email" , email_value);
         }
 
-        if(!phone_value.matches("^\\d{10}$")){
+        if((!phone_value.matches("^\\d{10}$")) || (phone_value.matches(""))){
             errflag = 0;
             phone.setError("please enter a valid 10 digits phone number");
         }else{
@@ -321,7 +321,7 @@ public class Signup extends AppCompatActivity implements AsyncResponse {
 
     public void navigatelogin(String s )
     {
-        if(s.matches("Registered successfully!"))
+        if(s.matches("Registered successfully! Please login using your details."))
         {
             Intent intent = new Intent(this,login.class);
             startActivity(intent);

@@ -189,15 +189,16 @@
                 android:id="@+id/editprofile_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:text="Date"
                 android:layout_weight=".4"
-                android:textSize="18sp"
-                android:textAlignment="center"
                 android:background="@drawable/textview"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="date"
+                android:onClick="datePickerPopup"
                 android:padding="4dp"
-                />
+                android:text="Date"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -241,11 +242,11 @@
             android:id="@+id/editprofile_save"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:text="Save Changes"
-            android:background="@drawable/button_style"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            />
+            android:background="@drawable/button_style"
+            android:onClick="saveDetails"
+            android:text="Save Changes" />
 
 
     </LinearLayout>
